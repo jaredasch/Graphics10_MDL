@@ -57,7 +57,7 @@ void my_main() {
     screen t;
     zbuffer zb;
     color g;
-    double step_3d = 20;
+    double step_3d = 100;
     double theta;
     int axis;
 
@@ -138,13 +138,13 @@ void my_main() {
             case BOX:
                 add_box(tmp, op[i].op.box.d0[0], op[i].op.box.d0[1], op[i].op.box.d0[2], op[i].op.box.d1[0], op[i].op.box.d1[1], op[i].op.box.d1[2]);
                 matrix_mult(peek(systems), tmp);
-                reflect = op[i].op.torus.constants == NULL ? &white : op[i].op.box.constants->s.c;
+                reflect = op[i].op.box.constants == NULL ? &white : op[i].op.box.constants->s.c;
                 draw_polygons(tmp, t, zb, view, light, ambient, reflect);
                 break;
             case SPHERE:
                 add_sphere(tmp, op[i].op.sphere.d[0], op[i].op.sphere.d[1], op[i].op.sphere.d[2], op[i].op.sphere.r, step_3d);
                 matrix_mult(peek(systems), tmp);
-                reflect = op[i].op.torus.constants == NULL ? &white : op[i].op.sphere.constants->s.c;
+                reflect = op[i].op.sphere.constants == NULL ? &white : op[i].op.sphere.constants->s.c;
                 draw_polygons(tmp, t, zb, view, light, ambient, reflect);
                 break;
             case TORUS:
